@@ -16,6 +16,6 @@ namespace FormsMvvm2019
 			set { _PassCode = value; OnPropertyChanged(); }
 		}
 
-		public string ButtonCommitText => "COMMIT";
+		public string ButtonCommitText => Properties.Resources.MainButtonCommitText;
 	}
 }

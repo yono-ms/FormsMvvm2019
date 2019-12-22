@@ -16,8 +16,14 @@
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
-        <Entry Text="{Binding PassCode, Mode=TwoWay}" Placeholder="{Binding PassCodePlaceholder}"/>
-        <Button Text="{Binding ButtonCommitText}" Command="{x:Static local:BizLogic.Command}" CommandParameter="{Binding}"/>
+        <Entry
+            Keyboard="Numeric"
+            Text="{Binding PassCode, Mode=TwoWay}"
+            Placeholder="{Binding PassCodePlaceholder}"/>
+        <Button
+            Text="{Binding ButtonCommitText}"
+            Command="{x:Static local:BizLogic.Command}"
+            CommandParameter="{Binding}"/>
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
