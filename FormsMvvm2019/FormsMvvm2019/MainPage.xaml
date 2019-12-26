@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:local="clr-namespace:FormsMvvm2019"
+    xmlns:prop="clr-namespace:FormsMvvm2019.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     x:Class="FormsMvvm2019.MainPage">
@@ -16,8 +17,17 @@
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
-        <Entry Text="{Binding PassCode, Mode=TwoWay}" Placeholder="{Binding PassCodePlaceholder}"/>
-        <Button Text="{Binding ButtonCommitText}" Command="{x:Static local:BizLogic.Command}" CommandParameter="{Binding}"/>
+        <Entry
+            Keyboard="Numeric"
+            Text="{Binding PassCode, Mode=TwoWay}"
+            Placeholder="{x:Static prop:PassCode.Prompt}"/>
+        <Label
+            TextColor="Red"
+            Text="{Binding PassCodeError}"/>
+        <Button
+            Text="{x:Static prop:Resources.MainButtonCommitText}"
+            Command="{x:Static local:BizLogic.Command}"
+            CommandParameter="{Binding}"/>
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
