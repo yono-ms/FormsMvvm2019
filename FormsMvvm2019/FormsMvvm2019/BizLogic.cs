@@ -11,6 +11,12 @@ namespace FormsMvvm2019
     {
         private static readonly ILogger logger = AppLogger.GetLogger(nameof(BizLogic));
 
+        static public Command ItemSelectedCommand => new Command(async (args) =>
+        {
+            var item = args as string;
+            await Application.Current.MainPage.DisplayAlert("ItemSelected", $"{args}", "OK");
+        });
+
         static public Command Command => new Command((args) =>
         {
             LogTrace($"START {args}");
