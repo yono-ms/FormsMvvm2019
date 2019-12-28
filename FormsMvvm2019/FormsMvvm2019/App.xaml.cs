@@ -10,6 +10,8 @@ namespace FormsMvvm2019
         {
             InitializeComponent();
 
+            AppLogger.InitializeLog();
+
             MainPage = new MainPage();
         }
 
