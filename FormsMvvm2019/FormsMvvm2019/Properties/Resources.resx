@@ -121,4 +121,8 @@
     <value>COMMIT</value>
     <comment>コミットボタン</comment>
   </data>
+  <data name="MainTitle" xml:space="preserve">
+    <value>2019</value>
+    <comment>MainPageタイトル</comment>
+  </data>
 </root>

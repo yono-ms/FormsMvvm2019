@@ -68,5 +68,14 @@ namespace FormsMvvm2019.Properties {
                 return ResourceManager.GetString("MainButtonCommitText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   2019 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MainTitle {
+            get {
+                return ResourceManager.GetString("MainTitle", resourceCulture);
+            }
+        }
     }
 }

@@ -6,13 +6,16 @@
     xmlns:local="clr-namespace:FormsMvvm2019"
     xmlns:prop="clr-namespace:FormsMvvm2019.Properties"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    ios:Page.UseSafeArea="true"
     mc:Ignorable="d"
-    x:Class="FormsMvvm2019.MainPage">
+    x:Class="FormsMvvm2019.MainPage"
+    Title="{x:Static prop:Resources.MainTitle}">
     <ContentPage.BindingContext>
         <local:MainViewModel/>
     </ContentPage.BindingContext>
 
-    <StackLayout>
+    <StackLayout Padding="8">
         <!-- Place new controls here -->
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
@@ -28,6 +31,20 @@
             Text="{x:Static prop:Resources.MainButtonCommitText}"
             Command="{x:Static local:BizLogic.Command}"
             CommandParameter="{Binding}"/>
+        <ListView>
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>item1</x:String>
+                    <x:String>item2</x:String>
+                    <x:String>item3</x:String>
+                    <x:String>item4</x:String>
+                    <x:String>item5</x:String>
+                </x:Array>
+            </ListView.ItemsSource>
+            <ListView.Behaviors>
+                <local:ListViewBehavior ItemSelectedCommand="{x:Static local:BizLogic.ItemSelectedCommand}"/>
+            </ListView.Behaviors>
+        </ListView>
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
