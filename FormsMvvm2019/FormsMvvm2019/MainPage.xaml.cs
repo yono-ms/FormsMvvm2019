@@ -16,6 +16,7 @@ namespace FormsMvvm2019
         public MainPage()
         {
             InitializeComponent();
+            BizLogic.InitializeViewModel(BindingContext);
         }
     }
 }
