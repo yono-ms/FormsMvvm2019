@@ -31,19 +31,29 @@
             Text="{x:Static prop:Resources.MainButtonCommitText}"
             Command="{x:Static local:BizLogic.Command}"
             CommandParameter="{Binding}"/>
-        <ListView>
-            <ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>item1</x:String>
-                    <x:String>item2</x:String>
-                    <x:String>item3</x:String>
-                    <x:String>item4</x:String>
-                    <x:String>item5</x:String>
-                </x:Array>
-            </ListView.ItemsSource>
+        <ListView
+            ItemsSource="{Binding PrefItems}">
             <ListView.Behaviors>
                 <local:ListViewBehavior ItemSelectedCommand="{x:Static local:BizLogic.ItemSelectedCommand}"/>
             </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type local:PrefItem}">
+                    <local:PrefItem>
+                        <local:PrefItem.Name>Name1</local:PrefItem.Name>
+                    </local:PrefItem>
+                    <local:PrefItem>
+                        <local:PrefItem.Name>Name2</local:PrefItem.Name>
+                    </local:PrefItem>
+                </x:Array>
+            </d:ListView.ItemsSource>
+            
         </ListView>
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"

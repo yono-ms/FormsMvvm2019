@@ -12,6 +12,14 @@ namespace FormsMvvm2019
 			PassCode = null;
 		}
 
+		private List<PrefItem> _PrefItems;
+
+		public List<PrefItem> PrefItems
+		{
+			get { return _PrefItems; }
+			set { _PrefItems = value; OnPropertyChanged(); }
+		}
+
 		private string _PassCode;
 		[Display(Name = "Name", ResourceType = typeof(Properties.PassCode))]
 		[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Properties.ErrorMessage))]

@@ -12,7 +12,21 @@ namespace FormsMvvm2019
 
             AppLogger.InitializeLog();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new SplashPage());
+        }
+
+        static AppDatabase database;
+
+        public static AppDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new AppDatabase();
+                }
+                return database;
+            }
         }
 
         protected override void OnStart()
