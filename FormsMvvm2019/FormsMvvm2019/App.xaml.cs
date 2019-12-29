@@ -12,8 +12,11 @@ namespace FormsMvvm2019
 
             AppLogger.InitializeLog();
 
-            MainPage = new NavigationPage(new SplashPage());
+            appCoordinator = new AppCoordinator();
+            appCoordinator.Initialize();
         }
+
+        private readonly AppCoordinator appCoordinator;
 
         static AppDatabase database;
 

@@ -186,3 +186,42 @@ MSの信頼度高い。
 
 LiteDBが遅いということは分かった。
 SQLiteはどうなのか未確認。
+
+# BizLogicとUI
+
+VMを作ることでViewとは分離できているが、
+Commandでawait DisplayAlertをはじめとする、
+UI系処理を実行している。
+
+## 問題点
+
+awaitは便利、しかしこんな行があると単体試験できない。
+
+## 2019年の発見
+
+昔ながらのフローチャートにする。
+
+- 入力
+  - 契機
+    - Command.Execute
+  - 引数
+    - Database
+    - VM
+- 出力
+  - Database
+  - VM
+  - DisplyAlert＜これがダメ
+  - DisplayActionSheet＜これがダメ
+  - PushAsync＜これがダメ
+
+### MessagingCenter
+
+UI処理を丸投げするメッセージを作る。
+DisplayAlertの継続処理のケースでは、
+BizLogicをAlert表示前／後に分離して関数化する。
+Send時にAlert表示後処理を渡せば継続処理を実行できる。
+
+送信元インスタンスが必要になるため、
+BizLogicからの使用は複数定義が必要になってしまう。
+これを回避するためEventArgsを送信元インスタンスにしてしまう。
+EventArgsに継続処理も入れられるのでペイロード不要になる。
