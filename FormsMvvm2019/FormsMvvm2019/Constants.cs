@@ -7,6 +7,11 @@ namespace FormsMvvm2019
 {
     public static class Constants
     {
+        /// <summary>
+        /// MessagingCenter 引数
+        /// </summary>
+        public const string MessageDisplayAlert = "DisplayAlert";
+
         public const string DatabaseFilename = "AppSQLite.db3";
 
         public const SQLite.SQLiteOpenFlags Flags =

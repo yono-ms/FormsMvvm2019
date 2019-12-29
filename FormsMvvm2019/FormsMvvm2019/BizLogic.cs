@@ -15,10 +15,10 @@ namespace FormsMvvm2019
     {
         private static readonly ILogger logger = AppLogger.GetLogger(nameof(BizLogic));
 
-        public static Command ItemSelectedCommand => new Command(async (args) =>
+        public static Command ItemSelectedCommand => new Command((args) =>
         {
             var item = args as PrefItem;
-            await Application.Current.MainPage.DisplayAlert("ItemSelected", $"{item.Code} {item.Name}", "OK");
+            MessagingCenter.Send(new AlertEventArgs("ItemSelected", $"{item.Code} {item.Name}", "OK"), Constants.MessageDisplayAlert);
         });
 
         public static Command Command => new Command((args) =>
@@ -27,12 +27,12 @@ namespace FormsMvvm2019
             switch (args)
             {
                 case MainViewModel mainViewModel:
-                    Application.Current.MainPage.DisplayAlert("BizLogic", $"PassCode={mainViewModel.PassCode}", "OK");
                     logger.LogInformation($"Button event. {mainViewModel.PassCode}");
+                    MessagingCenter.Send(new AlertEventArgs("BizLogic", $"PassCode={mainViewModel.PassCode}", "OK"), Constants.MessageDisplayAlert);
                     break;
 
                 default:
-                    Application.Current.MainPage.DisplayAlert("BizLogic", $"unknown args={args}", "OK");
+                    MessagingCenter.Send(new AlertEventArgs("BizLogic", $"unknown args={args}", "OK"), Constants.MessageDisplayAlert);
                     break;
             }
             LogTrace($"END");
