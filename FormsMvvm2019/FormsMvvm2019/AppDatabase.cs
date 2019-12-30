@@ -34,6 +34,11 @@ namespace FormsMvvm2019
             }
         }
 
+        public async Task DeleteAllAsync()
+        {
+            await Database.DeleteAllAsync<PrefItem>();
+        }
+
         public Task<int> SaveItemsAsync(List<PrefItem> items)
         {
             return Database.InsertAllAsync(items);
