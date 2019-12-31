@@ -10,7 +10,7 @@ namespace FormsMvvm2019
         /// <summary>
         /// MessagingCenter 引数
         /// </summary>
-        public const string MessageDisplayAlert = "DisplayAlert";
+        public const string MessageCoordinator = "Coordinator";
 
         public const string DatabaseFilename = "AppSQLite.db3";
 

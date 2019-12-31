@@ -18,15 +18,76 @@ namespace FormsMvvm2019
             logger = AppLogger.GetLogger(this);
         }
 
+        NavigationPage navigationPage;
+
         public void Initialize()
         {
-            MessagingCenter.Subscribe<AlertEventArgs>(this, Constants.MessageDisplayAlert, async (s) =>
+            MessagingCenter.Subscribe<AlertEventArgs>(this, Constants.MessageCoordinator, async (s) =>
             {
-                logger.LogInformation($"MessageDisplayAlert {s.Title} {s.Message}");
+                logger.LogInformation($"DisplayAlert {s.Title} {s.Message}");
                 await Application.Current.MainPage.DisplayAlert(s.Title, s.Message, s.Cancel);
             });
 
-            Application.Current.MainPage = new NavigationPage(new SplashPage());
+            MessagingCenter.Subscribe<PushEventArgs>(this, Constants.MessageCoordinator, async (s) =>
+            {
+                logger.LogInformation($"{s.Type} {s.NextPage}");
+                if (s.Type == PushType.Push)
+                {
+                    await navigationPage.CurrentPage.Navigation.PushAsync(s.NextPage);
+                }
+                else
+                {
+                    await navigationPage.CurrentPage.Navigation.PushModalAsync(s.NextPage);
+                }
+            });
+
+            MessagingCenter.Subscribe<PopEventArgs>(this, Constants.MessageCoordinator, async (s) =>
+            {
+                logger.LogInformation($"{s.Type}");
+                if (s.Type == PushType.Push)
+                {
+                    await navigationPage.CurrentPage.Navigation.PopAsync();
+                }
+                else
+                {
+                    await navigationPage.CurrentPage.Navigation.PopModalAsync();
+                }
+            });
+
+            navigationPage = new NavigationPage(new SplashPage());
+            Application.Current.MainPage = navigationPage;
+        }
+    }
+
+    public enum PushType
+    {
+        Push,
+        PushModal,
+    }
+
+    /// <summary>
+    /// Push用イベント引数
+    /// </summary>
+    public class PushEventArgs : EventArgs
+    {
+        public Page NextPage { get; set; }
+        public PushType Type { get; set; }
+        public PushEventArgs(Page page, PushType type=PushType.Push)
+        {
+            NextPage = page;
+            Type = type;
+        }
+    }
+
+    /// <summary>
+    /// Pop用イベント引数
+    /// </summary>
+    public class PopEventArgs : EventArgs
+    {
+        public PushType Type { get; set; }
+        public PopEventArgs(PushType type = PushType.Push)
+        {
+            Type = type;
         }
     }
 

@@ -18,7 +18,10 @@ namespace FormsMvvm2019
         public static Command ItemSelectedCommand => new Command((args) =>
         {
             var item = args as PrefItem;
-            MessagingCenter.Send(new AlertEventArgs("ItemSelected", $"{item.Code} {item.Name}", "OK"), Constants.MessageDisplayAlert);
+            var page = new NextPage { Title = item.Name };
+            var vm = page.BindingContext as NextViewModel;
+            vm.Code = item.Code;
+            MessagingCenter.Send(new PushEventArgs(page), Constants.MessageCoordinator);
         });
 
         public static Command Command => new Command((args) =>
@@ -28,11 +31,11 @@ namespace FormsMvvm2019
             {
                 case MainViewModel mainViewModel:
                     logger.LogInformation($"Button event. {mainViewModel.PassCode}");
-                    MessagingCenter.Send(new AlertEventArgs("BizLogic", $"PassCode={mainViewModel.PassCode}", "OK"), Constants.MessageDisplayAlert);
+                    MessagingCenter.Send(new AlertEventArgs("BizLogic", $"PassCode={mainViewModel.PassCode}", "OK"), Constants.MessageCoordinator);
                     break;
 
                 default:
-                    MessagingCenter.Send(new AlertEventArgs("BizLogic", $"unknown args={args}", "OK"), Constants.MessageDisplayAlert);
+                    MessagingCenter.Send(new AlertEventArgs("BizLogic", $"unknown args={args}", "OK"), Constants.MessageCoordinator);
                     break;
             }
             LogTrace($"END");
